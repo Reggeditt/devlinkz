@@ -1,3 +1,10 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.phone-frame-container {
+  background-image: url('../public/phone/fullshell.png');
+  background-position: center;
+  background-size: min(600px) ;
+  background-repeat: no-repeat;
+}
