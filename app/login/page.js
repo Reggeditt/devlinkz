@@ -6,7 +6,7 @@ import { useAuth } from "../context/authContext";
 import Image from "next/image";
 
 const SignupPage = () => {
-  const { signinUser } = useAuth();
+  const { signinUser, signinUserWithGoogle } = useAuth();
   const handleSubmit = (values) => {
     signinUser(values.email, values.password)
   };
@@ -35,16 +35,15 @@ const SignupPage = () => {
               }]}>
                 <input type='password' placeholder='At least 8 characters' className='w-full rounded-lg p-2 bg-white border-gray-300' />
               </Form.Item>
-              <small>Password must contain at least 8 characters</small>
               <Form.Item>
                 <Input type='submit' value="Create Account" className='bg-blue-500 rounded-lg pt-3 pb-3' />
               </Form.Item>
             </Form>
-            <Button type='primary' className='w-full bg-red-500 rounded-lg pt-3 pb-3'>
-              Sign up with Google
+            <Button type='primary' className='w-full bg-red-500 rounded-lg pt-3 pb-3' onClick={signinUserWithGoogle}>
+              Sign in with Google
             </Button>
           </div>
-          <p className='w-full'>Already have an account? <Link href='/login'>Login</Link></p>
+          <p className='w-full'>Dont have an account? <Link href='/signup'>Create account</Link></p>
         </div>
       </div>
     </>

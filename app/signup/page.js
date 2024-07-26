@@ -6,7 +6,7 @@ import { useAuth } from "../context/authContext";
 import Image from "next/image";
 
 const SignupPage = () => {
-  const { signupUser } = useAuth();
+  const { signupUser, signinUserWithGoogle } = useAuth();
   const handleSubmit = (values) => {
     console.log(values);
     signupUser(values.email, values.password)
@@ -63,7 +63,7 @@ const SignupPage = () => {
                 <Input type='submit' value="Create Account" className='bg-blue-500 rounded-lg pt-3 pb-3' />
               </Form.Item>
             </Form>
-            <Button type='primary' className='w-full bg-red-500 rounded-lg pt-3 pb-3'>
+            <Button type='primary' className='w-full bg-red-500 rounded-lg pt-3 pb-3' onClick={signinUserWithGoogle}>
               Sign up with Google
             </Button>
           </div>

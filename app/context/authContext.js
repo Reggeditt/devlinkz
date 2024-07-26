@@ -2,7 +2,7 @@
 
 import { auth } from "@/utilities/firebase/firebaseConfig";
 import { message } from "antd";
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, GoogleAuthProvider, signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
 import { useRouter } from "next/navigation";
 import { createContext, useContext, useState } from "react";
 
@@ -41,8 +41,24 @@ export const AuthProvider = ({children}) => {
     }
   };
     
+  const signinUserWithGoogle = () => {
+    console.log('signing up with google');
+    const provider = new GoogleAuthProvider();
+    signInWithPopup(auth, provider).then((result) => {
+      const credential = GoogleAuthProvider.credentialFromResult(result);
+      const token = credential.accessToken;
+      const user = result.user;
+      setUser(user);
+      router.push('/home');
+    }).catch((error) => {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      const email = error.email;
+      const credential = GoogleAuthProvider.credentialFromError(error);
+    });
+  };
   return (
-    <AuthContext.Provider value={{user, signupUser, signinUser}}>
+    <AuthContext.Provider value={{user, signupUser, signinUser, signinUserWithGoogle}}>
       {children}
     </AuthContext.Provider>
   )
