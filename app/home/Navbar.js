@@ -7,12 +7,12 @@ const Navbar = () => {
     <div 
     className='w-full h-[80px] bg-gray-400 flex justify-between items-center pl-10 pr-10 rounded-lg'
     >
-      <Link href={'/home'}><Image src='/logo.png' width={50} height={50} /></Link>
+      <Link href={'/home'}><Image src='/logo.png' width={100} height={100} /></Link>
       <nav className='flex justify-center items-center gap-5'>
           <Link href='/home/links'>Links</Link>
           <Link href='/home/profile'>Profile</Link>
       </nav>
-      <button>Preview</button>
+      <Link href='/preview'><button>Preview</button></Link>
     </div>
   )
 }

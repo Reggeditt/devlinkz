@@ -1,4 +1,4 @@
-import React from 'react'
+'use client'
 
 const PreviewPage = () => {
   return (
@@ -17,7 +17,7 @@ const PreviewPage = () => {
             flex flex-col justify-center items-center
           `}
         >
-          profile render goes here
+          profile data display here
         </div>
       </main>
     </div>
@@ -25,4 +25,3 @@ const PreviewPage = () => {
 }
 
 export default PreviewPage
- 

@@ -1,10 +1,23 @@
+'use client'
+
 import Image from "next/image"
 import Navbar from "./Navbar"
-import { Divider } from "antd"
-import fullshell from '../../public/phone/fullshell.png'
+import { Divider, message } from "antd"
 import DisplayProfile from "./DisplayProfile"
+import { useEffect } from "react"
+import { useRouter } from "next/navigation"
+import { useAuth } from "../context/authContext"
 
 const HomeLayout = ({ children }) => {
+  const router = useRouter();
+  const { user } = useAuth();
+
+  useEffect(() => {
+    if (!user) {
+      router.push('/login');
+      message.warning('Please login to access this page');
+    }
+  }, [user]);
   return (
     <div className="flex flex-col gap-3 w-screen h-screen p-2 bg-[#f5f5f5]">
       <Navbar />
