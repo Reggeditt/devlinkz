@@ -9,7 +9,12 @@
   background-repeat: no-repeat;
 }
 
-
+.getStartedBanner {
+  background-image: url('/public/getstarted.png');
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
 
 ::-webkit-scrollbar {
   width: 0;

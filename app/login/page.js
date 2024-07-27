@@ -36,7 +36,7 @@ const SignupPage = () => {
                 <input type='password' placeholder='At least 8 characters' className='w-full rounded-lg p-2 bg-white border-gray-300' />
               </Form.Item>
               <Form.Item>
-                <Input type='submit' value="Create Account" className='bg-blue-500 rounded-lg pt-3 pb-3' />
+                <Input type='submit' value="Login" className='bg-blue-500 rounded-lg pt-3 pb-3' />
               </Form.Item>
             </Form>
             <Button type='primary' className='w-full bg-red-500 rounded-lg pt-3 pb-3' onClick={signinUserWithGoogle}>
