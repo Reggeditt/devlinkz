@@ -5,7 +5,7 @@ import { Divider, message } from "antd"
 import { useEffect } from "react"
 import { useRouter } from "next/navigation"
 import { useAuth } from "../context/authContext"
-import DisplayProfileLinks from "./DisplayProfile"
+import DisplayProfileLinks from "./DisplayProfileLinks"
 import ProfileDisplayCard from "../ProfileCard"
 
 const HomeLayout = ({ children }) => {

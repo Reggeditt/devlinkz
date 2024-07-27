@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 .phone-frame-container {
-  background-image: url('../public/phone/container.png');
+  background-image: url('../public/phone/clean.png');
   background-position: center;
   /* background-size: 200px 350px ; */
   background-repeat: no-repeat;
