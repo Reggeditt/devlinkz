@@ -1,12 +1,12 @@
 'use client'
 
-import Image from "next/image"
 import Navbar from "./Navbar"
 import { Divider, message } from "antd"
-import DisplayProfile from "./DisplayProfile"
 import { useEffect } from "react"
 import { useRouter } from "next/navigation"
 import { useAuth } from "../context/authContext"
+import DisplayProfileLinks from "./DisplayProfile"
+import ProfileDisplayCard from "../ProfileCard"
 
 const HomeLayout = ({ children }) => {
   const router = useRouter();
@@ -23,8 +23,9 @@ const HomeLayout = ({ children }) => {
       <Navbar />
       <div className='flex justify-around w-full h-full rounded-xl'>
         <section className='min-w-[40%] rounded-lg flex justify-center items-center bg-white rounded-xl'>
-          <div className='phone-frame-container w-full h-full flex flex-col justify-center items-center'>
-            <DisplayProfile />
+          <div className='phone-frame-container pt-8 pb-3 bg-contain w-[250px] h-[350px] flex flex-col items-center gap-6'>
+            <ProfileDisplayCard />
+            <DisplayProfileLinks />
           </div>
         </section>
 

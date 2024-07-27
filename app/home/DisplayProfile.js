@@ -1,15 +1,43 @@
+import Link from 'next/link'
 import React from 'react'
 
-const DisplayProfile = () => {
+const DisplayProfileLinks = () => {
   return (
     <>
-      profile content will be here
-      {/* <Image src={'/phone/frame254.png'} width={80} height={80} className='rounded-full' /> */}
-      {/* <div className='bg-[#fafafd] w-[150px] h-[20px] rounded-lg'>some content</div>
-            <div className='bg-[#fafafa] w-[150px] h-[20px] rounded-lg'>some content</div>
-            <div className='bg-[#fafafa] w-[150px] h-[20px] rounded-lg'>some content</div> */}
+      <nav>
+        <div>
+          <Link href=''>
+            Github
+          </Link>
+        </div>
+        <div>
+          <Link href=''>
+            Github
+          </Link>
+        </div>
+        <div>
+          <Link href=''>
+            Github
+          </Link>
+        </div>
+        <div>
+          <Link href=''>
+            Github
+          </Link>
+        </div>
+        <div>
+          <Link href=''>
+            Github
+          </Link>
+        </div>
+        <div>
+          <Link href=''>
+            Github
+          </Link>
+        </div>
+      </nav>
     </>
   )
 }
 
-export default DisplayProfile
+export default DisplayProfileLinks

@@ -3,9 +3,9 @@
 @tailwind utilities;
 
 .phone-frame-container {
-  background-image: url('../public/phone/fullshell.png');
+  background-image: url('../public/phone/container.png');
   background-position: center;
-  background-size: min(600px) ;
+  /* background-size: 200px 350px ; */
   background-repeat: no-repeat;
 }
 
