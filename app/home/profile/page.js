@@ -6,12 +6,6 @@ import { useState } from 'react';
 
 const ProfileDetailsPage = () => {
   const [fileList, setFileList] = useState([
-    {
-      uid: '-1',
-      name: 'image.png',
-      status: 'done',
-      url: 'http://www.baidu.com/xxx.png',
-    },
   ]);
 
   const onChange = ({ fileList: newFileList }) => {
@@ -47,7 +41,8 @@ const ProfileDetailsPage = () => {
             {fileList.length < 5 && '+ Upload'}
           </Upload>
         </ImgCrop>
-        <p>Image must be below 1024x1024px. <br /> Use PNG or JPG format</p>
+        <Divider type='vertical' />
+        <p className='text-xs'>Image must be below 1024x1024px. <br /> Use PNG or JPG format</p>
       </div>
       <Divider />
       <div className='flex flex-col gap-1'>
