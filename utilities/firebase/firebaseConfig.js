@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import {initializeFirestore, persistentLocalCache} from 'firebase/firestore';
+import {collection, initializeFirestore, persistentLocalCache} from 'firebase/firestore';
 import { getAuth } from "firebase/auth";
 
 const firebaseConfig = {
@@ -13,4 +13,8 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 export const db = initializeFirestore(app, {localCache: persistentLocalCache({synchronizeTabs: true})});
+
+export const usersCollection = collection(db, 'users');
+export const profilesCollection = collection(db, 'profiles');
+
 export const auth = getAuth(app);

@@ -9,10 +9,10 @@ const ProfileDisplayCard = () => {
   const {user} = useAuth();
   return (
     <>
-    {console.log(user)}
       <div className='flex flex-col gap-2 justify-center items-center'>
         <div className='w-[55px] h-[55px] rounded-full relative'>
-          <Image src={'/ben.png'} fill className='rounded-full max-w-[100px]' />
+          {/* <Image src={user?.photoURL} fill className='rounded-full max-w-[100px]' /> */}
+          <img src={user?.photoURL} alt='profile' className='rounded-full max-w-[100px]' />
         </div>
         <div className='flex flex-col items-center'>
           <h1 className='font-bold text-xl'>{user?.displayName || 'User'}</h1>
