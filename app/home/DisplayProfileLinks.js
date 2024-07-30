@@ -1,3 +1,5 @@
+'use client'
+
 import Link from 'next/link'
 import { BsGithub } from "react-icons/bs";
 import { IoIosArrowRoundForward } from "react-icons/io"

@@ -1,18 +1,9 @@
-'use client'
+import React from 'react'
 
-import { useEffect } from "react";
-import { useAuth } from "./context/authContext";
-import HomePage from "./home/page";
-import { useRouter } from "next/navigation";
-
-export default function Home() {
-  const router = useRouter();
-  const { user } = useAuth();
-
-  useEffect(() => {
-    if (!user) {
-      router.push('/login');
-    } else router.push('/home');
-  }, [user]);
-  return <HomePage />;
+const SplashPage = () => {
+  return (
+    <div>SplashPage</div>
+  )
 }
+
+export default SplashPage

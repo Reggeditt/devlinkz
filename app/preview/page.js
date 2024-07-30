@@ -1,11 +1,13 @@
 'use client'
 
+import Link from "next/link"
+
 const PreviewPage = () => {
   return (
     <div className='relative bg-[#fafafa]'>
       <header className='p-5 bg-[#633CFF]'>
         <nav className='bg-white flex justify-between items-center pt-2 pb-2 pl-5 pr-5 rounded-xl'>
-          <button className='bg-white text-[#633CFF] border border-[#633CFF] px-4 py-2 rounded-lg'>Back to Editor</button>
+          <button className='bg-white text-[#633CFF] border border-[#633CFF] px-4 py-2 rounded-lg'><Link href="/home">Back to Editor</Link></button>
           <button className='bg-[#633CFF] text-white px-4 py-2 rounded-lg'>Share Link</button>
         </nav>
       </header>

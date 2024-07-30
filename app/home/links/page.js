@@ -1,10 +1,10 @@
 import React from 'react'
-import LinkForm from './LinkForm'
+import LinksList from './LinksList'
 
 const LinksPage = () => {
   return (
     <>
-      <LinkForm />
+      <LinksList />
     </>
   )
 }

@@ -5,12 +5,12 @@ import { message } from "antd";
 import { createUserWithEmailAndPassword, GoogleAuthProvider, signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
 import { addDoc } from "firebase/firestore";
 import { useRouter } from "next/navigation";
-import { createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useState } from "react";
 
 
-const AuthContext = createContext();
+export const AuthContext = createContext();
 
-export const AuthProvider = ({children}) => {
+export function AuthProvider({children}) {
   const router = useRouter();
   const [user, setUser] = useState(null);
 
@@ -93,6 +93,6 @@ export const AuthProvider = ({children}) => {
   )
 };
 
-export const useAuth = () => { 
+export function useAuth() { 
   return useContext(AuthContext);
 }
