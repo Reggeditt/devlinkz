@@ -16,5 +16,6 @@ export const db = initializeFirestore(app, {localCache: persistentLocalCache({sy
 
 export const usersCollection = collection(db, 'users');
 export const profilesCollection = collection(db, 'profiles');
+export const linksCollection = collection(db, 'links')
 
 export const auth = getAuth(app);
