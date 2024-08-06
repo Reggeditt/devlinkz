@@ -6,7 +6,7 @@ import Image from 'next/image'
 const NewUserPage = () => {
   return (
     <div className='flex flex-col justify-center items-center'>
-      <Image className='getStartedBanner bg-white rounded-lg' src={'/getstarted.svg'} width={150} height={200} />
+      <Image className='getStartedBanner bg-white rounded-lg' src={'/getstarted.svg'} width={150} height={200} alt='get started image'/>
       <h1 className='text-3xl font-bold text-left'>
         Lets get you started
       </h1>

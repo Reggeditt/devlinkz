@@ -1,8 +1,9 @@
+import Link from 'next/link'
 import React from 'react'
 
 const SplashPage = () => {
   return (
-    <div>SplashPage</div>
+    <div><Link href={'/home'}>SplashPage</Link></div>
   )
 }
 
