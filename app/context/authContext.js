@@ -19,11 +19,7 @@ export function AuthProvider({children}) {
       createUserWithEmailAndPassword(auth, email, password).then((userCredential) => {
         const user = userCredential.user;
         router.push('/home');
-        addDoc(usersCollection, {
-          email: user.email,
-          uid: user.uid,
-          username: user.displayName,
-        });
+        addDoc(usersCollection, user);
         setUser(user);
         message.success('User account created successfully');
       });
@@ -35,7 +31,7 @@ export function AuthProvider({children}) {
   const signinUser = async (email, password) => {
     try {
       signInWithEmailAndPassword(auth, email, password).then((userCredential) => {
-        const user = userCredential.user;
+        addDoc(usersCollection, userCredential.user);
         router.push('/home');
         setUser(user);
         message.success('User signed in successfully');
@@ -51,11 +47,11 @@ export function AuthProvider({children}) {
     console.log('signing up with google');
     const provider = new GoogleAuthProvider();
     signInWithPopup(auth, provider).then((result) => {
-      router.push('/home');
       const credential = GoogleAuthProvider.credentialFromResult(result);
       const token = credential.accessToken;
       const user = result.user;
       setUser(user);
+      router.push('/home');
     }).catch((error) => {
       const errorCode = error.code;
       const errorMessage = error.message;
@@ -73,21 +69,31 @@ export function AuthProvider({children}) {
       const credential = GoogleAuthProvider.credentialFromResult(result);
       const token = credential.accessToken;
       const user = result.user;
-      addDoc(usersCollection, {
-        email: user.email,
-        uid: user.uid,
-        username: user.displayName,
-      });
       setUser(user);
-    }).catch((error) => {
+    }).then(() => {
+      addDoc(usersCollection, user).then(() => {
+        message.success('User account added to DB successfully');
+      });
+    })
+    .catch((error) => {
       const errorCode = error.code;
       const errorMessage = error.message;
       const email = error.email;
       const credential = GoogleAuthProvider.credentialFromError(error);
     });
   };
+
+  const logoutUser = () => {
+    auth.signOut().then(() => {
+      message.success('User signed out successfully');
+      setUser(null);
+      router.push('/login');
+    }).catch((error) => {
+      message.error(error);
+    });
+  };
   return (
-    <AuthContext.Provider value={{user, signupUser, signinUser, signinUserWithGoogle, signupUserWithGoogle}}>
+    <AuthContext.Provider value={{user, signupUser, signinUser, signinUserWithGoogle, signupUserWithGoogle, logoutUser}}>
       {children}
     </AuthContext.Provider>
   )

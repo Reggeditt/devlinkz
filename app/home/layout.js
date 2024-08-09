@@ -6,8 +6,6 @@ import { useEffect, useState } from "react"
 import { usePathname, useRouter } from "next/navigation"
 import DisplayProfileLinks from "./DisplayProfileLinks"
 import ProfileDisplayCard from "../ProfileCard"
-import AddLinkBanner from "./AddLinkBanner"
-import ProfileBanner from "./ProfileBanner"
 import { auth } from "@/utilities/firebase/firebaseConfig"
 import { StoreProvider, useStore } from "../context/StoreContext"
 
@@ -17,12 +15,12 @@ const HomeLayout = ({ children }) => {
   const user = auth.currentUser
   const { linkData } = useStore()
   
-  useEffect(() => {
-    // if (!user) {
-    //   router.push('/login');
-    //   message.warning('Please login to access this page');
-    // }
-  }, [user, linkData]);
+  // useEffect(() => {
+  //   if (!user) {
+  //     router.push('/login');
+  //     message.warning('Please login to access this page');
+  //   }
+  // }, [user, linkData]);
 
   return (
     <StoreProvider>

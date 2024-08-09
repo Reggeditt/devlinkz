@@ -22,6 +22,7 @@ const LinksList = () => {
   return (
     <div className='links-list w-full h-full overflow-y-scroll'>
       {formData.map((link, index) => {
+        console.log('specific link data = ', link)
         return (
           <div key={link.id}>
             <div className='linkform-header flex justify-between items-center'>
@@ -30,7 +31,10 @@ const LinksList = () => {
             </div>
             <div className='linkform text-xs mt-1'>
               Platform
-              <Select className='w-full' options={
+              <Select
+                placeholder={link?.platform ? link.platform : 'Select a platform'}
+                className='w-full' 
+                options={
                 [
                   { label: 'GitHub', value: 'github', icon: <FaGithub /> },
                   { label: 'LinkedIn', value: 'linkedin', icon: <FaLinkedin /> },
@@ -38,7 +42,7 @@ const LinksList = () => {
                   { label: 'YouTube', value: 'youtube', icon: <FaYoutube /> }
                 ]
               }
-                defaultSelectedValue={link.platform}
+                defaultSelectedValue={'github'}
                 onSelect={(value) => {
                   console.log('onselect fired : value = ', value, ' linkData currently = ', linkData)
                   if (formData?.length === 0) {
