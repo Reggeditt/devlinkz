@@ -49,8 +49,8 @@ const HomePage = () => {
                     <div className="w-full text-xs flex items-start justify-between mt-1">
                       <div key={index} className='w-full'>
                         <div className='linkform-header flex justify-between items-center'>
-                          <span className='flex items-center text-sm'><TbMenu />link#{index}</span>
-                          <span className='text-xs text-gray-400' id={index}>Remove</span>
+                          <span className='flex items-center text-sm'><TbMenu />link#{index +1 }</span>
+                          <span className='text-xs text-gray-400' id={index + 1}>Remove</span>
                         </div>
                         <Form.Item
                           label={`Platform`}
@@ -89,8 +89,8 @@ const HomePage = () => {
                     <div key={key} className="w-full text-xs flex items-start justify-between mt-1">
                       <div className='linkform flex flex-col w-[90%]'>
                         <div className='linkform-header flex justify-between items-center'>
-                          <span className='flex items-center text-sm'><TbMenu />link#{index + formData.length}</span>
-                          <span className='text-xs text-gray-400' id={index + formData.length}>Remove</span>
+                          <span className='flex items-center text-sm'><TbMenu />link#{index + (formData?.length || 1)}</span>
+                          <span className='text-xs text-gray-400' id={index + (formData?.length || 1)}>Remove</span>
                         </div>
                         <Form.Item
                           {...restField}
