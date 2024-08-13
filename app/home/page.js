@@ -12,19 +12,18 @@ import { FaFacebook } from "react-icons/fa";
 import { FaYoutube } from "react-icons/fa";
 
 const HomePage = () => {
-  const { linkData, postLinksUpdate, updateLinksData } = useStore();
-  const [formData, setFormData] = useState([])
+  const { linkData, allLinks, postLinksUpdate, updateLinksData } = useStore();
   const [isDisabled, setisDisabled] = useState(false);
   const [form] = Form.useForm()
 
   const handleSubmit = (values) => {
-    console.log('handle submit has been called with values = ', values)
+    console.log('handle submit has been called with values = ', values.Links)
+    updateLinksData(values.Links)
   }
 
   useEffect(() => {
     linkData === null ? setisDisabled(true) : setisDisabled(false);
-    setFormData(linkData)
-  }, [linkData]);
+  }, [linkData, allLinks]);
 
   return (
     <>
@@ -45,7 +44,7 @@ const HomePage = () => {
                   Add New Link
                 </Button>
                 <div className="bg-[#fafafa] rounded-xl w-full h-[400px] overflow-y-scroll p-3 mt-1">
-                  {linkData && formData?.map((data, index) => (
+                  {linkData?.links?.map((data, index) => (
                     <div className="w-full text-xs flex items-start justify-between mt-1">
                       <div key={index} className='w-full'>
                         <div className='linkform-header flex justify-between items-center'>
@@ -89,8 +88,8 @@ const HomePage = () => {
                     <div key={key} className="w-full text-xs flex items-start justify-between mt-1">
                       <div className='linkform flex flex-col w-[90%]'>
                         <div className='linkform-header flex justify-between items-center'>
-                          <span className='flex items-center text-sm'><TbMenu />link#{index + (formData?.length || 1)}</span>
-                          <span className='text-xs text-gray-400' id={index + (formData?.length || 1)}>Remove</span>
+                          <span className='flex items-center text-sm'><TbMenu />link#{index + (linkData?.links?.length || 1)}</span>
+                          <span className='text-xs text-gray-400' id={index + (linkData?.links?.length || 1)}>Remove</span>
                         </div>
                         <Form.Item
                           {...restField}
@@ -104,6 +103,7 @@ const HomePage = () => {
                           ]}
                         >
                           <Select
+                            onSelect={setisDisabled(false)}
                             placeholder={'Select platform'}
                             className='w-full'
                             options={

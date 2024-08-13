@@ -1,7 +1,6 @@
 'use client'
 
 import Link from 'next/link'
-import { BsGithub } from "react-icons/bs";
 import { IoIosArrowRoundForward } from "react-icons/io"
 import { FaGithub } from "react-icons/fa";
 import { FaLinkedin } from "react-icons/fa";
@@ -13,8 +12,8 @@ const DisplayProfileLinks = () => {
   const { linkData } = useStore()
   return (
     <>
-      <nav className='w-full flex flex-col items-center'>
-        {linkData?.map((link, index) => (
+      <nav className='w-full flex flex-col items-center gap-3'>
+        {linkData?.links?.map((link, index) => (
             <div key={index} className='w-[140px] h-[40px] bg-[#eeeeee] rounded-xl pl-2 pr-2 flex justify-start items-center'>
           <Link href={link.link}>
             <div className='flex items-center gap-2 hover:text-[#FF6B6B]'>
@@ -26,10 +25,6 @@ const DisplayProfileLinks = () => {
         </div>
         )
         )}
-          {/* <Link href='' className='w-full flex items-center justify-between gap-1 text-sm'>
-            <span className='flex items-center gap-1'>< BsGithub />{`Github`}</span>
-            <IoIosArrowRoundForward />
-          </Link> */}
       </nav>
     </>
   )
