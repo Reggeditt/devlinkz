@@ -18,7 +18,6 @@ const Navbar = () => {
     <div 
     className='w-full h-[80px] bg-white flex justify-between items-center pl-10 pr-10 rounded-lg'
     >
-      {console.log(auth.currentUser)}
       <Link href={'/home'}><Image src='/logo.png' width={100} height={100} /></Link>
       <nav className='flex justify-center items-center gap-5'>
           <Link href='/home'>Links</Link>

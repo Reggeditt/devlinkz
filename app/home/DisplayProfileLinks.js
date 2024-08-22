@@ -12,7 +12,7 @@ const DisplayProfileLinks = () => {
   const { linkData } = useStore()
   return (
     <>
-      <nav className='w-full flex flex-col items-center gap-3'>
+      <nav className='w-full flex flex-col items-center gap-1'>
         {linkData?.links?.map((link, index) => (
             <div key={index} className='w-[140px] h-[40px] bg-[#eeeeee] rounded-xl pl-2 pr-2 flex justify-start items-center'>
           <Link href={link.link}>

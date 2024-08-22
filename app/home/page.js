@@ -10,9 +10,10 @@ import { FaGithub } from "react-icons/fa";
 import { FaLinkedin } from "react-icons/fa";
 import { FaFacebook } from "react-icons/fa";
 import { FaYoutube } from "react-icons/fa";
+import NewUserPage from "./NewUserPage";
 
 const HomePage = () => {
-  const { linkData, allLinks, postLinksUpdate, updateLinksData } = useStore();
+  const { linkData, allLinks, removeLinkData, updateLinksData } = useStore();
   const [isDisabled, setisDisabled] = useState(false);
   const [form] = Form.useForm()
 
@@ -21,8 +22,15 @@ const HomePage = () => {
     updateLinksData(values.Links)
   }
 
+  const removeLink = (data) => {
+    const filteredLinkList = linkData?.links?.filter(link => link.platform !== data.platform)
+    console.log('linkData = ', linkData, ' data= ', data, ' filtered = ', filteredLinkList)
+    removeLinkData(filteredLinkList)
+  }
+
   useEffect(() => {
-    linkData === null ? setisDisabled(true) : setisDisabled(false);
+    console.log(form.getFieldsValue('links'))
+    linkData?.links.length === 0 ? setisDisabled(true) : setisDisabled(false);
   }, [linkData, allLinks]);
 
   return (
@@ -44,29 +52,22 @@ const HomePage = () => {
                   Add New Link
                 </Button>
                 <div className="bg-[#fafafa] rounded-xl w-full h-[400px] overflow-y-scroll p-3 mt-1">
+                  {(linkData?.links.length === 0 && fields.length === 0) && <NewUserPage />}
                   {linkData?.links?.map((data, index) => (
                     <div className="w-full text-xs flex items-start justify-between mt-1">
                       <div key={index} className='w-full'>
                         <div className='linkform-header flex justify-between items-center'>
-                          <span className='flex items-center text-sm'><TbMenu />link#{index +1 }</span>
-                          <span className='text-xs text-gray-400' id={index + 1}>Remove</span>
+                          <span className='flex items-center text-sm'><TbMenu />link#{index}</span>
+                          <span className='text-xs text-gray-400 cursor' id={index} onClick={()=>removeLink(data)}>Remove</span>
                         </div>
                         <Form.Item
                           label={`Platform`}
                           name={'platform'}
                         >
-                          <Select
+                          <Input
                             disabled
                             placeholder={data.platform}
                             className='w-full'
-                            options={
-                              [
-                                { label: 'GitHub', value: 'github', icon: <FaGithub /> },
-                                { label: 'LinkedIn', value: 'linkedin', icon: <FaLinkedin /> },
-                                { label: 'Facebook', value: 'facebook', icon: <FaFacebook /> },
-                                { label: 'YouTube', value: 'youtube', icon: <FaYoutube /> }
-                              ]
-                            }
                           />
                         </Form.Item>
                         <Form.Item
@@ -89,7 +90,6 @@ const HomePage = () => {
                       <div className='linkform flex flex-col w-[90%]'>
                         <div className='linkform-header flex justify-between items-center'>
                           <span className='flex items-center text-sm'><TbMenu />link#{index + (linkData?.links?.length || 1)}</span>
-                          <span className='text-xs text-gray-400' id={index + (linkData?.links?.length || 1)}>Remove</span>
                         </div>
                         <Form.Item
                           {...restField}

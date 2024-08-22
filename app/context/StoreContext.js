@@ -10,14 +10,14 @@ export const StoreContext = createContext(null);
 export const StoreProvider = ({ children }) => {
   const [allLinks, setAllLinks] = useState(null);
   const [linkData, setLinkData] = useState(null);
+  const [linksDocRef, setLinksDocRef] = useState(null)
 
   const fetchData = (collectionRef, collectionName) => {
     onSnapshot(collectionRef, async (snapshot) => {
       const linksData = snapshot.docs.map(doc => doc.data())
       const userLinks = linksData.find(link => link.userId === auth.currentUser.uid)
       switch (collectionName) {
-        case 'links':          
-        console.log('links fetched successfully', linksData)
+        case 'links':
           setAllLinks(linksData)
           if (userLinks) {
             console.log(userLinks)
@@ -32,13 +32,10 @@ export const StoreProvider = ({ children }) => {
   }
 
   const updateLinksData = (linksArray) => {
-    const linksDocRef = doc(linksCollection, auth?.currentUser?.uid)
     console.log('update links data called with prop = ', linksArray)
     if (linkData) {
-      console.log('theres some existing link data', linkData, '\nIn addition to new data', linksArray)
       const newData = linkData
       newData.links.push(...linksArray)
-      console.log('new data to be updated', newData)
       updateDoc(linksDocRef, {
         userId: auth.currentUser.uid,
         links: newData.links
@@ -54,7 +51,17 @@ export const StoreProvider = ({ children }) => {
         links: linksArray
       })
     }
-    console.log('current linkData', linkData)
+  }
+
+  const removeLinkData = (newArray) => {
+    updateDoc(linksDocRef, {
+      userId: auth.currentUser.uid,
+      links: newArray
+    }).then(() => {
+      message.success('Link removed successfully!')
+    }).catch(error => {
+      message.error('Error removing link')
+    })
   }
 
   const postLinksUpdate = () => {
@@ -70,11 +77,14 @@ export const StoreProvider = ({ children }) => {
   }
 
   useEffect(() => {
-    fetchData(linksCollection, 'links')
-  }, [])
+    if (auth.currentUser) {
+      setLinksDocRef(doc(linksCollection, auth?.currentUser?.uid))
+      fetchData(linksCollection, 'links')
+    }
+  }, [auth.currentUser])
 
   return (
-    <StoreContext.Provider value={{ linkData, allLinks, setLinkData, updateLinksData, postLinksUpdate }}>
+    <StoreContext.Provider value={{ linkData, allLinks, setLinkData, updateLinksData, removeLinkData, postLinksUpdate }}>
       {children}
     </StoreContext.Provider>
   )

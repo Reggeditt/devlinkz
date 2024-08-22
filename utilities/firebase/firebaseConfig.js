@@ -1,4 +1,5 @@
 import { initializeApp } from "firebase/app";
+import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import {collection, initializeFirestore, persistentLocalCache} from 'firebase/firestore';
 import { getAuth } from "firebase/auth";
 
@@ -13,9 +14,13 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 export const db = initializeFirestore(app, {localCache: persistentLocalCache({synchronizeTabs: true})});
+export const storage = getStorage(app);
 
 export const usersCollection = collection(db, 'users');
 export const profilesCollection = collection(db, 'profiles');
 export const linksCollection = collection(db, 'links')
-
 export const auth = getAuth(app);
+
+
+export const storageRef = ref(storage, auth.currentUser?.uid);
+

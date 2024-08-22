@@ -8,19 +8,21 @@ import DisplayProfileLinks from "./DisplayProfileLinks"
 import ProfileDisplayCard from "../ProfileCard"
 import { auth } from "@/utilities/firebase/firebaseConfig"
 import { StoreProvider, useStore } from "../context/StoreContext"
+import { getAuth } from "firebase/auth"
+import { useAuth } from "../context/authContext"
 
 const HomeLayout = ({ children }) => {
   const router = useRouter();
   const path = usePathname()
-  const user = auth.currentUser
   const { linkData } = useStore()
-  
-  // useEffect(() => {
-  //   if (!user) {
-  //     router.push('/login');
-  //     message.warning('Please login to access this page');
-  //   }
-  // }, [user, linkData]);
+  const {user} = useAuth()
+  useEffect(() => {
+    if (!user) {
+      console.log(auth?.currentUser)
+      router.push('/login');
+      message.warning('Please login to access this page');
+    }
+  }, [user]);
 
   return (
     <StoreProvider>

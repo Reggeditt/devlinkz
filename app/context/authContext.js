@@ -2,17 +2,17 @@
 
 import { auth, usersCollection } from "@/utilities/firebase/firebaseConfig";
 import { message } from "antd";
-import { createUserWithEmailAndPassword, GoogleAuthProvider, signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
+import { createUserWithEmailAndPassword, getAuth, GoogleAuthProvider, signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
 import { addDoc } from "firebase/firestore";
 import { useRouter } from "next/navigation";
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useEffect, useState } from "react";
 
 
 export const AuthContext = createContext();
 
 export function AuthProvider({children}) {
   const router = useRouter();
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState(auth?.currentUser);
 
   const signupUser = async (email, password) => {
     try {
@@ -31,7 +31,6 @@ export function AuthProvider({children}) {
   const signinUser = async (email, password) => {
     try {
       signInWithEmailAndPassword(auth, email, password).then((userCredential) => {
-        addDoc(usersCollection, userCredential.user);
         router.push('/home');
         setUser(user);
         message.success('User signed in successfully');
@@ -92,6 +91,17 @@ export function AuthProvider({children}) {
       message.error(error);
     });
   };
+  
+  useEffect(() => {
+    getAuth()
+    auth.onAuthStateChanged((user) => {
+      if (user) {
+        setUser(user);
+      } else {
+        setUser(null);
+      }
+    });
+  }, []);
   return (
     <AuthContext.Provider value={{user, signupUser, signinUser, signinUserWithGoogle, signupUserWithGoogle, logoutUser}}>
       {children}
