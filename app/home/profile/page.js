@@ -1,6 +1,6 @@
 'use client'
 
-import { Button, Divider, Form, Input, Upload } from 'antd'
+import { Button, Divider, Form, Input, message, Upload } from 'antd'
 import ImgCrop from 'antd-img-crop'
 import { useState } from 'react';
 import ProfileBanner from '../ProfileBanner';
@@ -21,7 +21,7 @@ const ProfileDetailsPage = () => {
       lastName: values.lastName,
       email: values.email,
       profileImage: fileList
-    })
+    }).then(()=> message.success('profile updated successfully'))
   }
 
   const onChange = ({ fileList: newFileList }) => {

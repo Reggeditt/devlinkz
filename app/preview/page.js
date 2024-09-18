@@ -1,6 +1,8 @@
 'use client'
 
 import Link from "next/link"
+import ProfileDisplayCard from "../ProfileCard"
+import DisplayProfileLinks from "../home/DisplayProfileLinks"
 
 const PreviewPage = () => {
   return (
@@ -14,12 +16,14 @@ const PreviewPage = () => {
       <main className='relative'>
         <div className='banner bg-[#633CFF] rounded-b-2xl w-full h-[200px]'/>
         <div 
-          className={`
-            absolute w-[250px] h-[400px] bg-white top-20 left-[calc((100%-250px)/2)] rounded-2xl shadow-lg
-            flex flex-col justify-center items-center
-          `}
+          className='phone-frame-container2 pt-8 pb-3 bg-contain w-[250px] h-[450px] rounded-4xl flex flex-col items-center scale-2 gap-6 absolute top-20 left-[calc((100%-250px)/2)] shadow-lg'
+          // className={`
+          //   absolute w-[250px] h-[400px] bg-white top-20 left-[calc((100%-250px)/2)] rounded-2xl shadow-lg
+          //   flex flex-col justify-center items-center
+          // `}
         >
-          profile data display here
+          <ProfileDisplayCard />
+          <DisplayProfileLinks />
         </div>
       </main>
     </div>

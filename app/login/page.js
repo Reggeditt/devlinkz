@@ -13,7 +13,7 @@ const SignupPage = () => {
   return (
     <>
       <div className='prose min-w-screen min-h-screen flex flex-col justify-center items-center gap-5 bg-[#fafafa]'>
-        <Image src='/logo.png' width={100} height={100} />
+        <Link href='/'><Image src='/logo.png' width={100} height={100} /></Link>
         <div className='w-[467px] bg-white rounded-lg p-10 flex flex-col gap-5'>
           <div className='w-full flex flex-col gap-5 '>
             <h1 className='w-full font-bold'>Login</h1>
