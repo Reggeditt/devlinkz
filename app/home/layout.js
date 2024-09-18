@@ -1,28 +1,23 @@
 'use client'
 
 import Navbar from "./Navbar"
-import { Button, Divider, message } from "antd"
-import { useEffect, useState } from "react"
-import { usePathname, useRouter } from "next/navigation"
+import { message } from "antd"
+import { useEffect } from "react"
+import { useRouter } from "next/navigation"
 import DisplayProfileLinks from "./DisplayProfileLinks"
 import ProfileDisplayCard from "../ProfileCard"
 import { auth } from "@/utilities/firebase/firebaseConfig"
-import { StoreProvider, useStore } from "../context/StoreContext"
-import { getAuth } from "firebase/auth"
-import { useAuth } from "../context/authContext"
+import { StoreProvider } from "../context/StoreContext"
 
 const HomeLayout = ({ children }) => {
   const router = useRouter();
-  const path = usePathname()
-  const { linkData } = useStore()
-  const {user} = useAuth()
   useEffect(() => {
-    if (!user) {
-      console.log(auth?.currentUser)
+    if (!auth.currentUser) {
       router.push('/login');
+      console.log(auth?.currentUser)
       message.warning('Please login to access this page');
     }
-  }, [user]);
+  }, [auth.currentUser]);
 
   return (
     <StoreProvider>
